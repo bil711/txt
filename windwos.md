@@ -13,10 +13,10 @@
  **Пример:**
  >(пк1)- подключен к точки доступа на (пк2), переходиш в браузере по 192.168.137.224:8881(онже ip пк1),попадаеш на сетевую карту пк2 
  >```
- netsh interface portproxy add v4tov4 listenaddress=192.168.137.224 listenport=8881 connectaddress=192.168.137.1 connectport=8881 
+ >netsh interface portproxy add v4tov4 listenaddress=192.168.137.224 listenport=8881 connectaddress=192.168.137.1 connectport=8881 
  >```
  >пк2 слушает 192.168.137.1:8881 ( сетевая wi-fi ), и отправляет на 10.54.20.80
  >```
- netsh interface portproxy add v4tov4 listenaddress=192.168.137.1 listenport=8881  connectaddress=10.54.20.80 connectport=80
+ >netsh interface portproxy add v4tov4 listenaddress=192.168.137.1 listenport=8881  connectaddress=10.54.20.80 connectport=80
  >```
  
