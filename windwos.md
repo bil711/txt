@@ -19,4 +19,6 @@
  >```
  >netsh interface portproxy add v4tov4 listenaddress=192.168.137.1 listenport=8881  connectaddress=10.54.20.80 connectport=80
  >```
+ адрес для перехода -> 192.168.137.224:8881
+ 
  
