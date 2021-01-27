@@ -29,7 +29,7 @@ client1.key;
 ca.crt;  
 ta.key;   
 
-### Сервер ###  
+### config  cервер: ###  
 ```
 port 1194
 proto udp
@@ -85,7 +85,7 @@ verb 4
 
 ```
 
-###клиент:###
+### config клиент: ###
 ```
 client
 dev tun
