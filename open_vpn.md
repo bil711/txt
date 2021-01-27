@@ -7,13 +7,13 @@
  
  для генерации ключей нужна утилита easyrsa она должна была установиться вместе с open vpn  
  лежит она тут `/usr/share/easy-rsa/3.0.8` (возможны другие пути)  
- 1. выполняем ` ./easyrsa init-pki ` - создаст папку для ключей pki в тойже дериктории где сам easyrsa  
+1. выполняем ` ./easyrsa init-pki ` - создаст папку для ключей pki в тойже дериктории где сам easyrsa  
  **важно!** - ./easyrsa init-pki если выполнить в папке с симлинком на easyrsa то там и появится папка pki и фаил vars тоже должен лижать рядом
  
- 2. `./easyrsa build-ca nopass` - nopass, без пароля. результат: pki/ca.crt  /pki/private/ca.key  
- 3. ` openvpn --genkey --secret pki/ta.key ` результат: pki/ta.key  
-*4.* `./easyrsa gen-req server nopass` результат: /pki/reqs/server.req  /pki/private/server.key это закрытый ключ для сервера и файл запроса сертификата  
- 5. `./easyrsa gen-dh ` ключ Диффи-Хелмана результат: /pki/dh.pem 
+2. `./easyrsa build-ca nopass` - nopass, без пароля. результат: pki/ca.crt  /pki/private/ca.key  
+3. ` openvpn --genkey --secret pki/ta.key ` результат: pki/ta.key  
+4. `./easyrsa gen-req server nopass` результат: /pki/reqs/server.req  /pki/private/server.key это закрытый ключ для сервера и файл запроса сертификата  
+5. `./easyrsa gen-dh ` ключ Диффи-Хелмана результат: /pki/dh.pem 
  
  
 + `ca.crt` — файл открытой части сертификата CA, который используется сервером и клиентом OpenVPN, чтобы информировать друг друга о том, что они входят в единую сеть доверия и что между ними отсутствует потенциальный злоумышленник в качестве посредника. В связи с этим, копия файла ca.crt потребуется для вашего сервера и для всех ваших клиентов.
