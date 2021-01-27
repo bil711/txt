@@ -12,7 +12,7 @@
  
  2. `./easyrsa build-ca nopass` - nopass, без пароля. результат: pki/ca.crt  /pki/private/ca.key  
  3. ` openvpn --genkey --secret pki/ta.key ` результат: pki/ta.key  
-**4.** `./easyrsa gen-req server nopass` результат: /pki/reqs/server.req  /pki/private/server.key это закрытый ключ для сервера и файл запроса сертификата  
+*4.* `./easyrsa gen-req server nopass` результат: /pki/reqs/server.req  /pki/private/server.key это закрытый ключ для сервера и файл запроса сертификата  
  5. `./easyrsa gen-dh ` ключ Диффи-Хелмана результат: /pki/dh.pem 
  
  
