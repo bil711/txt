@@ -29,6 +29,86 @@ client1.key;
 ca.crt;  
 ta.key;   
 
+###Сервер###
+```
+port 1194
+proto udp
+dev tun
+
+ca /etc/openvpn/easy-rsa/pki/ca.crt
+cert /etc/openvpn/easy-rsa/pki/issued/server.crt
+key /etc/openvpn/easy-rsa/pki/private/server.key
+dh /etc/openvpn/easy-rsa/pki/dh.pem
+
+# Проверка, не отозван ли сертификат клиента
+# crl-verify crl.pem
+
+server 10.8.12.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+
+# Пусть весь трафик клиента идет через VPN
+push "redirect-gateway def1"
+
+# DNS хостинга сервера (или иные, по вашему усмотрению):
+push "dhcp-option DNS 8.8.8.8"
+
+keepalive 10 120
+
+tls-server
+tls-auth /etc/openvpn/easy-rsa/pki/ta.key 0
+tls-timeout 120
+auth MD5
+
+cipher BF-CBC
+
+comp-lzo
+
+max-clients 10
+
+user nobody
+group nobody
+
+persist-key
+persist-tun
+
+status openvpn-status.log
+
+log /var/log/openvpn.log
+
+# 0 is silent, except for fatal errors
+# 4 is reasonable for general usage
+# 5 and 6 can help to debug connection problems
+# 9 is extremely verbose
+verb 4
+
+
+
+```
+
+###клиент:###
+```
+client
+dev tun
+proto udp
+remote 95.107.80.8 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+mute-replay-warnings
+ns-cert-type server
+tls-auth ta.key 1
+auth MD5
+
+ca ca.crt
+cert client1.crt
+key client1.key
+
+data-ciphers BF-CBC
+comp-lzo
+verb 3
+```
+
  
  
 + `ca.crt` — файл открытой части сертификата CA, который используется сервером и клиентом OpenVPN, чтобы информировать друг друга о том, что они входят в единую сеть доверия и что между ними отсутствует потенциальный злоумышленник в качестве посредника. В связи с этим, копия файла ca.crt потребуется для вашего сервера и для всех ваших клиентов.
