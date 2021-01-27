@@ -16,7 +16,18 @@
 3. ` openvpn --genkey --secret pki/ta.key ` = pki/ta.key  файл HMAC, для дополнительной верификации клиента и сервера
 4. `./easyrsa gen-req server nopass` = /pki/reqs/server.req  /pki/private/server.key это закрытый ключ для сервера и файл запроса сертификата  
 5. `./easyrsa gen-dh ` ключ Диффи-Хелмана = /pki/dh.pem
-6. `./easyrsa gen-crl` (*не обезательный п.*) = pki/crl.pem список отозванных сертификатов  
+6. `./easyrsa gen-crl` (*не обезательный п.*) = pki/crl.pem список отозванных сертификатов
+
+###Для клиента###
+
+1. `./easyrsa gen-req client1 nopass`  
+2. `./easyrsa sign-req client client1`  
+
+*Для клиента*  
+client1.crt;
+client1.key;
+ca.crt;
+ta.key; 
 
  
  
