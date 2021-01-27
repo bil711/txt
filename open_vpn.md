@@ -23,11 +23,11 @@
 1. `./easyrsa gen-req client1 nopass`  
 2. `./easyrsa sign-req client client1`  
 
-*Для клиента*  
-client1.crt;
-client1.key;
-ca.crt;
-ta.key; 
+**Для клиента 4 файла**  
+client1.crt;  
+client1.key;  
+ca.crt;  
+ta.key;   
 
  
  
