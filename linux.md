@@ -90,6 +90,17 @@ net.ipv4.ip_forward=1
 #net/ipv6/conf/default/forwarding=1  
 #net/ipv6/conf/all/forwarding=1  
 ```
+### в UFW напярмую нельзя пробросить порт, поэтому правила пишуться напрямую в дефолтные настройки ufw -> /etc/ufw/before.rules ,впереди всех строк:
+```
+# NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+
+ -A PREROUTING -i enp0s3 -p tcp --dport 8080 -j DNAT --to-destination 10.0.2.12:80 
+ -A POSTROUTING -s 10.0.2.12/24 -o enp0s3 -j MASQUERADE
+COMMIT
+```
+
 непроверенный пример:  
 ```
 iptables -t nat -A PREROUTING -i eth0 -p tcp -d {PUBLIC_IP} --dport 80 -j DNAT --to {INTERNAL_IP}:80  
@@ -98,13 +109,18 @@ iptables -t nat -A POSTROUTING -s 192.168.1.0/24 ! -d 192.168.1.0/24 -j MASQUERA
 ```
 пример:
 ```  
--A PREROUTING -i enp0s3 -d 192.168.137.217   -p tcp --dport 8080 -j  DNAT --to-destination 10.0.2.112:80
--A POSTROUTING -s 10.0.2.112/24 ! -d 10.0.2.112/24 -j MASQUERA
+iptables -t nat -A PREROUTING -i enp0s3 -d 192.168.137.217   -p tcp --dport 8080 -j  DNAT --to-destination 10.0.2.12:80
+iptables -t nat -A POSTROUTING -s 10.0.2.12/24 ! -d 10.0.2.12/24 -j MASQUERADE
 ```
 пример:
 ```
--A PREROUTING -i enp0s3 -p tcp --dport 22 -j DNAT --to-destination 10.0.2.112  
--A POSTROUTING -s 10.0.2.112/24 -o enp0s3 -j MASQUERADE
+iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 80 -j DNAT --to-destination 10.0.2.12  
+iptables -t nat -A POSTROUTING -s 10.0.2.12/24 -o enp0s3 -j MASQUERADE
+```
+пример:
+```
+iptables -t nat -A PREROUTING -d 192.168.137.217 -p tcp -m tcp --dport 80 -j DNAT --to-destination 10.0.2.12:80
+iptables -t nat -A POSTROUTING -s 10.0.2.12 -p tcp -m tcp --dport 80 -j SNAT --to-source 192.168.137.217:80
 ```
 
 
