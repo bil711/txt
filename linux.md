@@ -42,7 +42,25 @@ iptables -P OUTPUT ACCEPT
 `ufw enable, reload` - включить фаерволл и добавить его в автозагрузку.   
 `ufw reset` - сбросить все настройки.  
 
-## NAT
+
+`ufw default deny incoming` - запретить все входящие  
+`ufw default allow outgoing` - разрешить входящие 
+
+
+`ufw allow OpenSSH` - открыть ssh
+`ufw allow 22`  
+`ufw allow 22/tcp`
+
+чтобы запретить ping, протокол icmp редактируй `/etc/ufw/before.rules`  
+закоментируй все строки на протоколе icmp  
+    
+
+
+
+
+ 
+
+## включение NAT для ufw
 
 In the file /etc/default/ufw change the parameter DEFAULT_FORWARD_POLICY
 
