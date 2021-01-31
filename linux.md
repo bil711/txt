@@ -2,7 +2,7 @@
 
 
 `sudo apt-get install lighttpd` -  веб-сервера 
- HTTP File Server - ( аналог для windows)[http://www.rejetto.com/hfs/?f=dl]
+ HTTP File Server - [аналог для windows](http://www.rejetto.com/hfs/?f=dl)
  ` apt install links` - браузер в терменале links    
   
   
@@ -20,7 +20,7 @@
   
   ` iptables -L -v -n ` - посмотреть правила.
   
-  очистить все правила
+  очистить все правила:
   ```
 iptables -F
 iptables -X
