@@ -1,14 +1,14 @@
 
 
 
-`sudo apt-get install lighttpd` -  веб-сервера 
- HTTP File Server - [аналог для windows](http://www.rejetto.com/hfs/?f=dl)
+`sudo apt-get install lighttpd` -  веб-сервера  
+ HTTP File Server - [аналог для windows](http://www.rejetto.com/hfs/?f=dl)  
  ` apt install links` - браузер в терменале links    
   
   
   настройка форвардинга, исчезнут после перезагрузки. ppp0 - это интерфейс на который приходин инэт.  
   ```
-  echo 1 > /proc/sys/net/ipv4/ip_forward 
+  echo 1 > /proc/sys/net/ipv4/ip_forward  
   iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE 
   ```
   ` nano /etc/sysctl.conf ` - на постоянную после перезагрузки редактируй  
@@ -20,7 +20,7 @@
   
   ` iptables -L -v -n ` - посмотреть правила.
   
-  очистить все правила:
+  очистить все правила:  
   ```
 iptables -F
 iptables -X
