@@ -46,10 +46,14 @@ iptables -P OUTPUT ACCEPT
 `ufw default deny incoming` - запретить все входящие  
 `ufw default allow outgoing` - разрешить входящие 
 
+`ufw status verbose` - посмотреть польз. правила.
+
 
 `ufw allow OpenSSH` - открыть ssh
 `ufw allow 22`  
 `ufw allow 22/tcp`
+
+`ufw allow in on eth0 to any port 80`
 
 чтобы запретить ping, протокол icmp редактируй `/etc/ufw/before.rules`  
 закоментируй все строки на протоколе icmp  
