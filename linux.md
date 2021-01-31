@@ -38,8 +38,9 @@ iptables -P OUTPUT ACCEPT
 ## ufw брэндмауэр
 
 
-`sudo ufw status` - статус  
-`ufw enable` - включить фаерволл и добавить его в автозагрузку   
+`sudo ufw status` - статус.  
+`ufw enable, reload` - включить фаерволл и добавить его в автозагрузку.   
+`ufw reset` - сбросить все настройки.  
 
 ## NAT
 
