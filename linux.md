@@ -52,8 +52,13 @@ iptables -P OUTPUT ACCEPT
 `ufw allow OpenSSH` - открыть ssh  
 `ufw allow 22`  
 `ufw allow 22/tcp`
+`ufw deny 80` - блокировка 80 порта
+`ufw allow 80/tcp` - разрешить 80 по протоколу TCP
 
-`ufw allow in on eth0 to any port 80`
+
+`ufw allow in on enp0s3 to any port 80` - разрешить на определенный сетевой интерфейс  
+`ufw allow in on enp0s3 to any port 1521` - разрешить на определенный сетевой интерфейс 
+`ufw deny in on enp0s3 to any port 1521`  - запретить на определенный сетевой интерфейс     
 
 чтобы запретить ping, протокол icmp редактируй `/etc/ufw/before.rules`  
 закоментируй все строки на протоколе icmp  
