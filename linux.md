@@ -9,5 +9,5 @@
   iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE 
   ```
   ` nano /etc/sysctl.conf ` - на постоянную после перезагрузки редактируй  
-  ` net.ipv4.ip_forward=1 `
+  ` net.ipv4.ip_forward=1 `  
   ` sudo sysctl -p `  - применить настройки.
