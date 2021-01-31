@@ -57,8 +57,8 @@ iptables -P OUTPUT ACCEPT
 
 
 `ufw allow in on enp0s3 to any port 80` - разрешить на определенный сетевой интерфейс  
-`ufw allow in on enp0s3 to any port 1521` - разрешить на определенный сетевой интерфейс 
-`ufw deny in on enp0s3 to any port 1521`  - запретить на определенный сетевой интерфейс     
+`ufw allow in on enp0s3 to any port 1521` - разрешить на определенный сетевой интерфейс   
+`ufw deny in on enp0s3 to any port 1521`  - запретить на определенный сетевой интерфейс       
 
 чтобы запретить ping, протокол icmp редактируй `/etc/ufw/before.rules`  
 закоментируй все строки на протоколе icmp  
