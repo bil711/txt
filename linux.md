@@ -35,7 +35,8 @@ iptables -P OUTPUT ACCEPT
 ```
 
 
-### ufw брэндмауэр
+## ufw брэндмауэр
+***
 
 `sudo ufw status` - статус 
 `ufw enable` - включить фаерволл и добавить его в автозагрузку 
