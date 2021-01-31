@@ -45,17 +45,17 @@ iptables -P OUTPUT ACCEPT
 
 
 `ufw default deny incoming` - запретить все входящие  
-`ufw default allow outgoing` - разрешить входящие 
+`ufw default allow outgoing` - разрешить входящие  
 
-`ufw status verbose` - посмотреть польз. правила.
-`ufw show raw` - посмотреть правила в вида iptables.
+`ufw status verbose` - посмотреть польз. правила.   
+`ufw show raw` - посмотреть правила в вида iptables.  
 
 
 `ufw allow OpenSSH` - открыть ssh  
 `ufw allow 22`  
-`ufw allow 22/tcp`
-`ufw deny 80` - блокировка 80 порта
-`ufw allow 80/tcp` - разрешить 80 по протоколу TCP
+`ufw allow 22/tcp`   
+`ufw deny 80` - блокировка 80 порта   
+`ufw allow 80/tcp` - разрешить 80 по протоколу TCP   
 `ufw allow from 10.68.23.15` - разрешить 10.68.23.15 доступ к всем портам сервера   
 `ufw allow from 10.68.23.15 to any port 22` - разрешить 10.68.23.15 порт 22   
 
@@ -103,8 +103,8 @@ iptables -t nat -A POSTROUTING -s 192.168.1.0/24 ! -d 192.168.1.0/24 -j MASQUERA
 ```
 пример:
 ```
--A PREROUTING -i enp0s3 -p tcp --dport 22 -j DNAT --to-destination 192.168.1.10  
--A POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE
+-A PREROUTING -i enp0s3 -p tcp --dport 22 -j DNAT --to-destination 10.0.2.112  
+-A POSTROUTING -s 10.0.2.112/24 -o enp0s3 -j MASQUERADE
 ```
 
 
