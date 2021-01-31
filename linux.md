@@ -34,6 +34,12 @@ iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
 ```
 
+
+### ufw брэндмауэр
+
+`sudo ufw status` - статус 
+`ufw enable` - включить фаерволл и добавить его в автозагрузку 
+
 ## NAT
 
 In the file /etc/default/ufw change the parameter DEFAULT_FORWARD_POLICY
