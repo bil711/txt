@@ -1,9 +1,9 @@
 
+` ip -c a `  ` ip -c link show ` 
 
-
-`sudo apt-get install lighttpd` -  веб-сервера  
+`sudo apt-get install lighttpd` -  легкий веб-сервер  
  HTTP File Server - [аналог для windows](http://www.rejetto.com/hfs/?f=dl)  
- ` apt install links` - браузер в терменале links    
+ ` apt install links` - браузер в терменале links (нажми Esc)    
   
   
   настройка форвардинга, исчезнут после перезагрузки. ppp0 - это интерфейс на который приходин инэт.  
@@ -18,7 +18,8 @@
   
   ### iptables.
   
-  ` iptables -L -v -n ` - посмотреть правила.
+  ` iptables -L -v -n ` - посмотреть правила.  
+  ` iptables -t nat -L -n -v ` - + nat
   
   очистить все правила:  
   ```
