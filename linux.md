@@ -1,7 +1,9 @@
 
 
 
-  `sudo apt-get install lighttpd` -  веб-сервера  
+`sudo apt-get install lighttpd` -  веб-сервера 
+ HTTP File Server - ( аналог для windows)[http://www.rejetto.com/hfs/?f=dl]
+  
   
   настройка форвардинга, исчезнут после перезагрузки. ppp0 - это интерфейс на который приходин инэт.  
   ```
