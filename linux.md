@@ -49,7 +49,7 @@ iptables -P OUTPUT ACCEPT
 `ufw status verbose` - посмотреть польз. правила.
 
 
-`ufw allow OpenSSH` - открыть ssh
+`ufw allow OpenSSH` - открыть ssh  
 `ufw allow 22`  
 `ufw allow 22/tcp`
 
