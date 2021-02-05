@@ -1,4 +1,20 @@
 
+### Службы
+
+` systemctl list-units --type service` - список только программ   
+` systemctl list-units --type service -all ` - список всех  
+` systemctl --failed ` - список служб с неудачным запуском  
+` systemctl show --property=UnitPath ` - пути расположения юнит файлов    
+
+` systemctl daemon-reload ` - перезакрузить настройки, приминить настройки   
+
+для того чтобы узнать содержимое, и расположение файла юниты - ` systemctl cat openvpn-server@.service `    
+
+
+
+
+
+
 ` ip -c a `  ` ip -c link show ` 
 
 `sudo apt-get install lighttpd` -  легкий веб-сервер  
