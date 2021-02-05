@@ -1,6 +1,14 @@
 
 
+
+
+ ` systemctl status openvpn@server `
+
  ### настройка OpenVPN
+ 
+ была обнаружена непонятная логика систем юнитов:  
+` systemctl status openvpn-server@.service  - вот он запущин !!!!  
+` systemctl status openvpn-server@server.service ` - но вот он упровляет   
  
  [тут оригинал ](https://bozza.ru/art-269.html)
  
