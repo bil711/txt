@@ -5,11 +5,11 @@
  
 
  ### настройка OpenVPN
- [ man, описание параметров](https://www.lissyara.su/doc/man/safety/openvpn/)
+ [ man, описание параметров](https://www.lissyara.su/doc/man/safety/openvpn/)  
  
- была обнаружена непонятная логика систем юнитов:  
-` systemctl status openvpn-server@.service  - вот он запущин !!!!  
-` systemctl status openvpn-server@server.service ` - но вот он упровляет   
+ была обнаружена непонятная логика систем юнитов:    
+` systemctl status openvpn-server@.service `  - вот он запущин !!!!  
+` systemctl status openvpn-server@server.service ` - но вот он упровляет     
  
  [тут оригинал ](https://bozza.ru/art-269.html)
  
