@@ -5,6 +5,7 @@
 ` systemctl list-units --type service -all ` - список всех  
 ` systemctl --failed ` - список служб с неудачным запуском  
 ` systemctl show --property=UnitPath ` - пути расположения юнит файлов    
+` systemctl list-dependencies openvpn-server@server.service ` - посмотреть зависимость юнита, что за чем запускаеться   
 
 ` systemctl daemon-reload ` - перезакрузить настройки, приминить настройки   
 
