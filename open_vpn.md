@@ -182,7 +182,7 @@ DELAY=5
 ``` 
 
 > вилан настроен на физ. интерфейсе, вот конфиг:    
-> ```
+```
 NAME=enp6s0
 UUID=eA0f6dd7-dd54-4eae-b87c-22ade71301f1
 DEVICE=enp6s0
@@ -192,7 +192,8 @@ NM_CONTROLLED=no
 BRIDGE=br0
 STP=no
 #VLAN=yes
-> ```
+```
+<  
 
 ``` 
 port 1194
