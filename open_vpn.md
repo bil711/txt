@@ -276,4 +276,100 @@ up /etc/openvpn/server/server_up.sh
 ```  
 
 
+### config tun  
+проверил на ceos, с нэтом.  
+
+config сервер:     
+```
+port 1194
+proto udp
+dev tun
+mode server
+topology subnet
+
+
+ca /etc/openvpn/easy-rsa/pki/ca.crt
+cert /etc/openvpn/easy-rsa/pki/issued/server.crt
+key /etc/openvpn/easy-rsa/pki/private/server.key
+dh /etc/openvpn/easy-rsa/pki/dh.pem
+tls-server
+tls-auth /etc/openvpn/easy-rsa/pki/ta.key 0
+tls-timeout 120
+keepalive 10 120
+persist-key
+persist-tun
+
+# Проверка, не отозван ли сертификат клиента
+# crl-verify crl.pem
+
+#local 192.168.1.200
+server 10.10.10.0 255.255.255.0
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 8.8.8.8"
+
+
+ifconfig-pool-persist ipp.txt
+client-config-dir /etc/openvpn/server/ccd # директория с индивидуальными настройками клиентов
+
+client-to-client
+auth MD5
+cipher BF-CBC
+comp-lzo
+max-clients 10
+user nobody
+group nobody
+status openvpn-status.log
+log /var/log/openvpn.log
+verb 4
+
+
+
+```
+
+config клент:  
+```
+client
+dev tun
+proto udp
+remote 109.61.131.18 1194
+
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+mute-replay-warnings
+
+
+#ns-cert-type server
+tls-auth ta.key 1
+auth MD5
+
+ca ca.crt
+cert client1.crt
+key client1.key
+
+#route 192.168.1.200 255.255.255.0
+
+data-ciphers BF-CBC
+comp-lzo
+verb 3
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
