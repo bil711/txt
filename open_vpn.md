@@ -193,7 +193,7 @@ BRIDGE=br0
 STP=no
 #VLAN=yes
 ```
-<  
+  
 
 ``` 
 port 1194
@@ -264,6 +264,18 @@ script-security 2
 up /etc/openvpn/server/server_up.sh
 
 ```  
+<p style="font-size: 36px; font-family: Times, serif; color: red;">Hello, world!</p>
+ Внимание! после старта опен впн, запускаеться скрипт в конце конфига /etc/openvpn/server/server_up.sh   
+ вот он :   
+ ```
+#!/bin/bash
+# Переводим интерфейс в состояние "up"
+/sbin/ifconfig tap0 up
+# Добавляем его в br0
+/usr/sbin/brctl addif br0 tap0
+
+ 
+ ```
 
 
 
