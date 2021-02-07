@@ -121,4 +121,112 @@ verb 3
  
  
 + `ca.crt` — файл открытой части сертификата CA, который используется сервером и клиентом OpenVPN, чтобы информировать друг друга о том, что они входят в единую сеть доверия и что между ними отсутствует потенциальный злоумышленник в качестве посредника. В связи с этим, копия файла ca.crt потребуется для вашего сервера и для всех ваших клиентов.
-+ `ca.key` — закрытый ключ CA, используемый для подписания ключей и сертификатов серверов и клиентов. Если злоумышленник получит доступ к CA и файлу ca.key, он сможет подписывать запросы сертификатов и получать доступ к вашей VPN, что нарушит ее безопасность. Поэтому файл ca.key должен храниться только на компьютере CA, и для дополнительной безопасности компьютер CA следует выключать, когда он не используется для подписывания запросов сертификатов
++ `ca.key` — закрытый ключ CA, используемый для подписания ключей и сертификатов серверов и клиентов. Если злоумышленник получит доступ к CA и файлу ca.key, он сможет подписывать запросы сертификатов и получать доступ к вашей VPN, что нарушит ее безопасность. Поэтому файл ca.key должен храниться только на компьютере CA, и для дополнительной безопасности компьютер CA следует выключать, когда он не используется для подписывания запросов сертификатов  
+
+
+### Пример конфига TAP
+* клиент: 
+тест на windows, подключилось через интерфейс тап. 
+```
+client
+dev tap
+proto udp
+remote 109.61.199.70 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+mute-replay-warnings
+
+
+ns-cert-type server
+tls-auth ta.key 1
+auth MD5
+
+ca ca.crt
+cert client1.crt
+key client1.key
+
+data-ciphers BF-CBC
+comp-lzo
+verb 3
+
+``` 
+
+<hr> 
+
+
+* сервер : 
+
+``` 
+port 1194
+proto udp
+dev tap0
+
+ca /etc/openvpn/easy-rsa/pki/ca.crt
+cert /etc/openvpn/easy-rsa/pki/issued/server.crt
+key /etc/openvpn/easy-rsa/pki/private/server.key
+dh /etc/openvpn/easy-rsa/pki/dh.pem
+
+# Проверка, не отозван ли сертификат клиента
+# crl-verify crl.pem
+
+
+
+server-bridge 192.168.1.151 255.255.255.0 192.168.1.152 192.168.1.160  #Характерно для соеденинения в режиме бриджа.
+
+ifconfig 192.168.1.151 255.255.255.0
+
+# ifconfig-pool-persist ipp.txt
+
+# Пусть весь трафик клиента идет через VPN
+
+# push "redirect-gateway 10.0.2.1"
+# push "route 192.168.1.200 255.255.255.0"
+ push "redirect-gateway def1"
+
+# DNS хостинга сервера (или иные, по вашему усмотрению):
+ push "dhcp-option DNS 8.8.8.8"
+
+client-to-client
+
+keepalive 10 120
+
+tls-server
+tls-auth /etc/openvpn/easy-rsa/pki/ta.key 0
+tls-timeout 120
+auth MD5
+
+cipher BF-CBC
+
+comp-lzo
+
+max-clients 10
+
+user nobody
+group nobody
+
+persist-key
+persist-tun
+
+status openvpn-status.log
+
+log /var/log/openvpn.log
+
+# 0 is silent, except for fatal errors
+# 4 is reasonable for general usage
+# 5 and 6 can help to debug connection problems
+# 9 is extremely verbose
+verb 4
+
+# Уровень безопасности. Как минимум нужна возможность запускать скрипты при старте
+# script-security 2
+script-security 2
+
+# Скрипт, запускаемый при поднятии интерфейса
+up /etc/openvpn/server/server_up.sh
+
+```  
+
+
+
