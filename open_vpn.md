@@ -125,7 +125,7 @@ verb 3
 
 
 ### Пример конфига TAP
-* клиент: 
+* клиент:   
 тест на windows, подключилось через интерфейс тап. 
 ```
 client
@@ -156,7 +156,43 @@ verb 3
 <hr> 
 
 
-* сервер : 
+* сервер :  
+сетевой интерфейс настроен как bridge   
+ > вот конфиг vilana ( /etc/sysconfig/network-scripts/ifcfg-br0 )   
+ 
+ ```
+DEVICE=br0
+NAME=br0
+TYPE=Bridge
+IPV6INIT=yes
+#BROADCAST=192.168.1.255
+DNS1=8.8.8.8
+DNS2=8.8.4.4
+BOOTPROTO=static
+#MTU=1500
+IPADDR=192.168.1.200
+NETMASK=255.255.255.0
+#DEFROUTE=yes
+NETWORK=192.168.1.0
+IPV4_FAILURE_FATAL=yes
+ONBOOT=yes
+NM_CONTROLLED=no
+STP=no
+DELAY=5
+``` 
+
+> вилан настроен на физ. интерфейсе, вот конфиг:    
+```
+NAME=enp6s0
+UUID=eA0f6dd7-dd54-4eae-b87c-22ade71301f1
+DEVICE=enp6s0
+ONBOOT=yes
+BOOTPROTO=static
+NM_CONTROLLED=no
+BRIDGE=br0
+STP=no
+#VLAN=yes
+```
 
 ``` 
 port 1194
