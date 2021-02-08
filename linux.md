@@ -114,7 +114,7 @@ net.ipv4.ip_forward=1
 :POSTROUTING ACCEPT [0:0]
 
  -A PREROUTING -i enp0s3 -p tcp --dport 8080 -j DNAT --to-destination 10.0.2.12:80 
- -A POSTROUTING -s 10.0.2.12/24 -o enp0s3 -j MASQUERADE
+ iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
 COMMIT
 ```
 
