@@ -353,13 +353,100 @@ key client1.key
 data-ciphers BF-CBC
 comp-lzo
 verb 3
+```
 
 
+<hr>  
+## Пример конфига tun ( с нетом и сетью)  
+пинг работает в обе стороны   
+
+для пинга в локалюную сеть 192.168.1.0, она на enp6s0    
+```
+iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o enp6s0 -j MASQUERADE
+```
+
+### config servera   
+```
+port 1194
+proto udp
+dev tun
+mode server
+topology subnet
 
 
+ca /etc/openvpn/easy-rsa/pki/ca.crt
+cert /etc/openvpn/easy-rsa/pki/issued/server.crt
+key /etc/openvpn/easy-rsa/pki/private/server.key
+dh /etc/openvpn/easy-rsa/pki/dh.pem
+tls-server
+tls-auth /etc/openvpn/easy-rsa/pki/ta.key 0
+tls-timeout 120
+keepalive 10 120
+persist-key
+persist-tun
 
+
+server 10.10.10.0 255.255.255.0
+push "192.168.1.0 255.255.255.0"
+
+ifconfig-pool-persist ipp.txt
+client-config-dir /etc/openvpn/server/ccd # директория с индивидуальными настройками клиентов
+
+client-to-client
+auth MD5
+cipher BF-CBC
+#comp-lzo
+max-clients 10
+user openvpn
+group openvpn
+status openvpn-status.log
+log /var/log/openvpn.log
+verb 4
 
 ```
+config client-config-dir /etc/openvpn/server/ccd/client1:   
+```
+iroute 10.10.10.0 255.255.255.0
+ifconfig-push 10.10.10.11 255.255.255.0
+```
+### config client:   
+```
+client
+dev tun
+proto udp
+remote 109.61.131.18 1194
+
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+mute-replay-warnings
+
+
+#ns-cert-type server
+tls-auth ta.key 1
+auth MD5
+
+ca ca.crt
+cert client1.crt
+key client1.key
+
+#route 192.168.1.0 255.255.255.0
+redirect-gateway def1
+
+data-ciphers BF-CBC
+#comp-lzo
+verb 3
+
+
+
+
+
+
+```  
+
+
+
 
 
 
